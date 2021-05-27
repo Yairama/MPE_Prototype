@@ -40,20 +40,73 @@ namespace cvk {
         vkDeviceWaitIdle(cvkDevice.device());
     }
 
-    void FirstApp::loadGameObjects() {
+    // temporary helper function, creates a 1x1x1 cube centered at offset
+    std::unique_ptr<CvkModel> createCubeModel(CvkDevice& device, glm::vec3 offset) {
         std::vector<CvkModel::Vertex> vertices{
-                {{0.0f,  -0.5f}, {1.0f, 0.0f, 0.0f}},
-                {{0.5f,  0.5f},  {0.0f, 1.0f, 0.0f}},
-                {{-0.5f, 0.5f},  {0.0f, 0.0f, 1.0f}}};
-        auto cvkModel = std::make_shared<CvkModel>(cvkDevice, vertices);
-        auto triangle = CvkGameObject::createGameObject();
-        triangle.model = cvkModel;
-        triangle.color = {0.1f, 0.8f, 0.1f};
-        triangle.transform2D.translation.x = 0.2f;
-        triangle.transform2D.scale = {2.0f,0.5f};
-        triangle.transform2D.rotation = 0.25f * glm::two_pi<float>();
 
-        gameObjects.push_back(std::move(triangle));
+                // left face (white)
+                {{-.5f, -.5f, -.5f}, {.9f, .9f, .9f}},
+                {{-.5f, .5f, .5f}, {.9f, .9f, .9f}},
+                {{-.5f, -.5f, .5f}, {.9f, .9f, .9f}},
+                {{-.5f, -.5f, -.5f}, {.9f, .9f, .9f}},
+                {{-.5f, .5f, -.5f}, {.9f, .9f, .9f}},
+                {{-.5f, .5f, .5f}, {.9f, .9f, .9f}},
+
+                // right face (yellow)
+                {{.5f, -.5f, -.5f}, {.8f, .8f, .1f}},
+                {{.5f, .5f, .5f}, {.8f, .8f, .1f}},
+                {{.5f, -.5f, .5f}, {.8f, .8f, .1f}},
+                {{.5f, -.5f, -.5f}, {.8f, .8f, .1f}},
+                {{.5f, .5f, -.5f}, {.8f, .8f, .1f}},
+                {{.5f, .5f, .5f}, {.8f, .8f, .1f}},
+
+                // top face (orange, remember y axis points down)
+                {{-.5f, -.5f, -.5f}, {.9f, .6f, .1f}},
+                {{.5f, -.5f, .5f}, {.9f, .6f, .1f}},
+                {{-.5f, -.5f, .5f}, {.9f, .6f, .1f}},
+                {{-.5f, -.5f, -.5f}, {.9f, .6f, .1f}},
+                {{.5f, -.5f, -.5f}, {.9f, .6f, .1f}},
+                {{.5f, -.5f, .5f}, {.9f, .6f, .1f}},
+
+                // bottom face (red)
+                {{-.5f, .5f, -.5f}, {.8f, .1f, .1f}},
+                {{.5f, .5f, .5f}, {.8f, .1f, .1f}},
+                {{-.5f, .5f, .5f}, {.8f, .1f, .1f}},
+                {{-.5f, .5f, -.5f}, {.8f, .1f, .1f}},
+                {{.5f, .5f, -.5f}, {.8f, .1f, .1f}},
+                {{.5f, .5f, .5f}, {.8f, .1f, .1f}},
+
+                // nose face (blue)
+                {{-.5f, -.5f, 0.5f}, {.1f, .1f, .8f}},
+                {{.5f, .5f, 0.5f}, {.1f, .1f, .8f}},
+                {{-.5f, .5f, 0.5f}, {.1f, .1f, .8f}},
+                {{-.5f, -.5f, 0.5f}, {.1f, .1f, .8f}},
+                {{.5f, -.5f, 0.5f}, {.1f, .1f, .8f}},
+                {{.5f, .5f, 0.5f}, {.1f, .1f, .8f}},
+
+                // tail face (green)
+                {{-.5f, -.5f, -0.5f}, {.1f, .8f, .1f}},
+                {{.5f, .5f, -0.5f}, {.1f, .8f, .1f}},
+                {{-.5f, .5f, -0.5f}, {.1f, .8f, .1f}},
+                {{-.5f, -.5f, -0.5f}, {.1f, .8f, .1f}},
+                {{.5f, -.5f, -0.5f}, {.1f, .8f, .1f}},
+                {{.5f, .5f, -0.5f}, {.1f, .8f, .1f}},
+
+        };
+        for (auto& v : vertices) {
+            v.position += offset;
+        }
+        return std::make_unique<CvkModel>(device, vertices);
+    }
+
+    void FirstApp::loadGameObjects() {
+        std::shared_ptr<CvkModel> cvkModel = createCubeModel(cvkDevice, {0.f,0.f,0.f});
+
+        auto cube = CvkGameObject::createGameObject();
+        cube.model = cvkModel;
+        cube.transform.translation = {.0f, .0, .5f};
+        cube.transform.scale = {.5f,.5f,.5f};
+        gameObjects.push_back(std::move(cube));
     }
 
 
