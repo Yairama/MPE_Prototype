@@ -55,7 +55,11 @@ add_executable(core main.cpp
         vk_core/simple_render_system.cpp
 
         vk_core/tests/rainbow_system.hpp
+        vk_core/cvk_camera.hpp
+        vk_core/cvk_camera.cpp
+
         ${IMGUI_SRC}
+
         )
 
 

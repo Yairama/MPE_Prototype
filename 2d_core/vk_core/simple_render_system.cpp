@@ -59,8 +59,8 @@ namespace cvk {
         pipelineConfig.pipelineLayout = pipelineLayout;
         cvkPipeline = std::make_unique<CvkPipeline>(
                 cvkDevice,
-                R"(C:\Users\Yairama\Desktop\WeCandoIt\MPE_Prototype\vk_core\shaders\simple_shader.vert.spv)",
-                R"(C:\Users\Yairama\Desktop\WeCandoIt\MPE_Prototype\vk_core\shaders\simple_shader.frag.spv)",
+                R"(.\..\vk_core\shaders\simple_shader.vert.spv)",
+                R"(.\..\vk_core\shaders\simple_shader.frag.spv)",
                 pipelineConfig);
     }
 

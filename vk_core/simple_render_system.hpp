@@ -1,5 +1,6 @@
 #pragma once
 
+#include "cvk_camera.hpp"
 #include "cvk_device.hpp"
 #include "cvk_game_object.hpp"
 #include "cvk_pipeline.hpp"
@@ -18,7 +19,8 @@ namespace cvk {
         SimpleRenderSystem(const SimpleRenderSystem &) = delete;
         SimpleRenderSystem &operator=(const SimpleRenderSystem &) = delete;
 
-        void renderGameObjects(VkCommandBuffer commandBuffer, std::vector<CvkGameObject> &gameObjects);
+        void renderGameObjects(VkCommandBuffer commandBuffer, std::vector<CvkGameObject> &gameObjects,
+                               const CvkCamera &camera);
 
     private:
         void createPipelineLayout();

@@ -27,7 +27,7 @@ namespace cvk {
     private:
         void loadGameObjects();
 
-        CvkWindow cvkWindow{WIDTH, HEIGHT, "Vulkan Tutorial"};
+        CvkWindow cvkWindow{WIDTH, HEIGHT, "Mining Planning Engine"};
         CvkDevice cvkDevice{cvkWindow};
         CvkRenderer cvkRenderer{cvkWindow,cvkDevice};
         std::vector<CvkGameObject> gameObjects;

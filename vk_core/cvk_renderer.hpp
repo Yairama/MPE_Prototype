@@ -20,6 +20,7 @@ namespace cvk {
         CvkRenderer &operator=(const CvkRenderer &) = delete;
 
         VkRenderPass getSwapChainRenderPass() const {return  cvkSwapChain->getRenderPass();}
+        float getAspectRatio() const {return cvkSwapChain->extentAspectRatio();}
         bool isFrameInProgress() const {return isFrameStarted;}
 
         VkCommandBuffer getCurrentCommandBuffer() const {
