@@ -1,9 +1,13 @@
 #include "first_app.hpp"
 
+#include "cvk_imgui.hpp"
 #include "cvk_camera.hpp"
 #include "simple_render_system.hpp"
 
 // libs
+#include <../imgui/imgui.h>
+#include <../imgui/imgui_impl_glfw.h>
+#include <../imgui/imgui_impl_vulkan.h>
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/glm.hpp>
@@ -23,6 +27,12 @@ namespace cvk {
     FirstApp::~FirstApp() {}
 
     void FirstApp::run() {
+        // create imgui, and pass in dependencies
+        CvkImgui cvkImgui{
+                cvkWindow,
+                cvkDevice,
+                cvkRenderer.getSwapChainRenderPass(),
+                cvkRenderer.getImageCount()};
         SimpleRenderSystem simpleRenderSystem{cvkDevice, cvkRenderer.getSwapChainRenderPass()};
         CvkCamera camera{};
         //camera.setViewDirection(glm::vec3(0.f), glm::vec3(0.5f,0.f,1.f));
@@ -40,8 +50,15 @@ namespace cvk {
                 // render shadow casting objects
                 // end offscreen shadow pass
 
+                // tell imgui that we're starting a new frame
+                cvkImgui.newFrame();
+
                 cvkRenderer.beginSwapChainRenderPass(commandBuffer);
                 simpleRenderSystem.renderGameObjects(commandBuffer, gameObjects, camera);
+
+                cvkImgui.runExample();
+                cvkImgui.render(commandBuffer);
+
                 cvkRenderer.endSwapChainRenderPass(commandBuffer);
                 cvkRenderer.endFrame();
             }
