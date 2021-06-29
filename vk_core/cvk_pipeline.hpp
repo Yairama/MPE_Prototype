@@ -44,6 +44,7 @@ struct PipelineConfigInfo {
         static void normalLinesPipeline(PipelineConfigInfo& configInfo);
         static void triangleLinesPipeline(PipelineConfigInfo& configInfo);
         static void pointsPipeline(PipelineConfigInfo& configInfo);
+        static void trianglePointsPipeline(PipelineConfigInfo& configInfo);
 
     private:
         static void defaultPipelineConfigInfo(PipelineConfigInfo& configInfo);

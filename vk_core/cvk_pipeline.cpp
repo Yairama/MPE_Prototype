@@ -153,6 +153,15 @@ void CvkPipeline::triangleLinesPipeline(PipelineConfigInfo& configInfo){
     defaultPipelineConfigInfo(configInfo);
 }
 
+
+void CvkPipeline::trianglePointsPipeline(PipelineConfigInfo &configInfo) {
+    configInfo.inputAssemblyInfo.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
+    configInfo.rasterizationInfo.polygonMode = VK_POLYGON_MODE_LINE;
+
+    defaultPipelineConfigInfo(configInfo);
+}
+
+/** TO DO: Implement the gl_PointSize for pointsPipeline() method */
 void CvkPipeline::pointsPipeline(PipelineConfigInfo &configInfo) {
     configInfo.inputAssemblyInfo.topology = VK_PRIMITIVE_TOPOLOGY_POINT_LIST;
     configInfo.rasterizationInfo.polygonMode = VK_POLYGON_MODE_POINT;
