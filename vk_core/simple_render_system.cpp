@@ -53,7 +53,7 @@ namespace cvk {
         assert(pipelineLayout != nullptr && "Cannot create pipeline before pipeline layout");
 
         PipelineConfigInfo pipelineConfig{};
-        CvkPipeline::defaultPipelineConfigInfo(pipelineConfig);
+        CvkPipeline::normalPipeline(pipelineConfig);
         pipelineConfig.renderPass = renderPass;
         pipelineConfig.pipelineLayout = pipelineLayout;
         cvkPipeline = std::make_unique<CvkPipeline>(

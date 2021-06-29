@@ -26,35 +26,39 @@ struct PipelineConfigInfo {
   uint32_t subpass = 0;
 };
 
-class CvkPipeline {
- public:
-  CvkPipeline(
-      CvkDevice& device,
-      const std::string& vertFilepath,
-      const std::string& fragFilepath,
-      const PipelineConfigInfo& configInfo);
-  ~CvkPipeline();
+    class CvkPipeline {
+    public:
+        CvkPipeline(
+            CvkDevice& device,
+            const std::string& vertFilepath,
+            const std::string& fragFilepath,
+            const PipelineConfigInfo& configInfo);
+        ~CvkPipeline();
 
-  CvkPipeline(const CvkPipeline&) = delete;
-  CvkPipeline& operator=(const CvkPipeline&) = delete;
+        CvkPipeline(const CvkPipeline&) = delete;
+        CvkPipeline& operator=(const CvkPipeline&) = delete;
 
-  void bind(VkCommandBuffer commandBuffer);
+        void bind(VkCommandBuffer commandBuffer);
 
-  static void defaultPipelineConfigInfo(PipelineConfigInfo& configInfo);
+        static void normalPipeline(PipelineConfigInfo& configInfo);
+        static void normalLinesPipeline(PipelineConfigInfo& configInfo);
+        static void triangleLinesPipeline(PipelineConfigInfo& configInfo);
+        static void pointsPipeline(PipelineConfigInfo& configInfo);
 
- private:
-  static std::vector<char> readFile(const std::string& filepath);
+    private:
+        static void defaultPipelineConfigInfo(PipelineConfigInfo& configInfo);
+        static std::vector<char> readFile(const std::string& filepath);
 
-  void createGraphicsPipeline(
-      const std::string& vertFilepath,
-      const std::string& fragFilepath,
-      const PipelineConfigInfo& configInfo);
+        void createGraphicsPipeline(
+            const std::string& vertFilepath,
+            const std::string& fragFilepath,
+            const PipelineConfigInfo& configInfo);
 
-  void createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule);
+        void createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule);
 
-  CvkDevice& cvkDevice;
-  VkPipeline graphicsPipeline;
-  VkShaderModule vertShaderModule;
-  VkShaderModule fragShaderModule;
-};
+        CvkDevice& cvkDevice;
+        VkPipeline graphicsPipeline;
+        VkShaderModule vertShaderModule;
+        VkShaderModule fragShaderModule;
+    };
 }  // namespace cvk
