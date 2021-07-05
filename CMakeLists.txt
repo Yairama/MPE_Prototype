@@ -60,8 +60,8 @@ add_executable(core main.cpp
 
         ${IMGUI_SRC}
 
-        vk_core/cvk_imgui.cpp
-        vk_core/cvk_imgui.hpp)
+        gui/vk_core/cvk_imgui.cpp
+        gui/vk_core/cvk_imgui.hpp gui/vk_core/cvk_gui_content.hpp)
 
 
 target_link_libraries(core glfw)

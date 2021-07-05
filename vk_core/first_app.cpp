@@ -1,6 +1,6 @@
 #include "first_app.hpp"
 
-#include "cvk_imgui.hpp"
+#include "../gui/vk_core/cvk_imgui.hpp"
 #include "cvk_camera.hpp"
 #include "simple_render_system.hpp"
 
