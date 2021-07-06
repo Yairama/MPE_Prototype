@@ -4,8 +4,8 @@
 
 #include "cvk_imgui.hpp"
 
-#include "../../vk_core/cvk_device.hpp"
-#include "../../vk_core/cvk_window.hpp"
+#include "../cvk_device.hpp"
+#include "../cvk_window.hpp"
 
 // libs
 #include "../../lib/imgui/imgui.h"
@@ -16,7 +16,7 @@
 #include <stdexcept>
 
 //content
-#include "cvk_gui_content.hpp"
+#include "../../gui/gui_content.hpp"
 
 namespace cvk {
 
@@ -129,9 +129,7 @@ namespace cvk {
         // 3. Show another simple window.
         ShowAnotherSimpleWindow(show_another_window);
 
-        // Creates the left's layout
-        CreateLeftLayout(projectNodesSize);
-
+        //TODO: Create the docking layouts
 
     }
 

@@ -5,8 +5,8 @@
 
 #pragma once
 
-#include "../../vk_core/cvk_device.hpp"
-#include "../../vk_core/cvk_window.hpp"
+#include "../cvk_device.hpp"
+#include "../cvk_window.hpp"
 
 // libs
 #include "../../lib/imgui/imgui.h"
@@ -40,8 +40,9 @@ namespace cvk {
         bool show_demo_window = true;
         bool show_another_window = false;
         ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-        ImVec2 projectNodesSize = ImVec2(300,300);
-        ImVec2 filesChooserSize = ImVec2(300,300);
+        ImVec2 leftLayoutSize = ImVec2(300,300);
+        ImVec2 rightLayoutSize = ImVec2(300,300);
+        ImVec2 consoleSize = ImVec2(300,300);
         void runExample();
 
     private:
