@@ -1,5 +1,6 @@
 #include "first_app.hpp"
 
+#include "keyboard_movement_controller.hpp"
 #include "cvk_camera.hpp"
 #include "simple_render_system.hpp"
 
@@ -13,6 +14,7 @@
 #include <array>
 #include <cassert>
 #include <stdexcept>
+#include <chrono>
 
 namespace cvk {
 
@@ -28,8 +30,21 @@ namespace cvk {
         //camera.setViewDirection(glm::vec3(0.f), glm::vec3(0.5f,0.f,1.f));
         camera.setViewTarget(glm::vec3(-1.f, -2.f, 2.f), glm::vec3(0.f,0.f,2.5f));
 
+        auto viewerObject = CvkGameObject::createGameObject();
+        KeyboardMovementController cameraController{};
+
+
+        auto currentTime = std::chrono::high_resolution_clock::now();
+
         while (!cvkWindow.shouldClose()) {
             glfwPollEvents();
+
+            auto newTime = std::chrono::high_resolution_clock::now();
+            float frameTime = std::chrono::duration<float, std::chrono::seconds::period>(newTime - currentTime).count();
+            currentTime = newTime;
+
+            cameraController.moveInPlaneXZ(cvkWindow.getGLFWwindow(), frameTime, viewerObject);
+            camera.setViewYXZ(viewerObject.transform.translation, viewerObject.transform.rotation);
 
             float aspect = cvkRenderer.getAspectRatio();
             //camera.setOrthographicProjection(-aspect,aspect,-1,1,-1,1);

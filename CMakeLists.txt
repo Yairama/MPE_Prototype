@@ -60,7 +60,7 @@ add_executable(core main.cpp
 
         ${IMGUI_SRC}
 
-        )
+        vk_core/keyboard_movement_controller.hpp vk_core/keyboard_movement_controller.cpp)
 
 
 target_link_libraries(core glfw)
