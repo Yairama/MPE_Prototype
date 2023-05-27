@@ -18,4 +18,4 @@ I don't have images or videos, but you can compile, it works (i guess)
 
 
 This is:
-<video src='https://user-images.githubusercontent.com/45445692/231274126-11fa964a-bc69-4880-bbd8-a9c2b0592682.mp4' width=720></video>
+https://user-images.githubusercontent.com/45445692/231274126-11fa964a-bc69-4880-bbd8-a9c2b0592682.mp4
